@@ -1,0 +1,64 @@
+class Solution {
+  /**
+   * @param elements
+   *     Array of integers to be sorted.
+   */
+  public static void quickSort(int[] elements) {
+  if(elements.length <= 1){return;}
+   
+   int l = 0;       //initialize amount of int on the left of pivot
+   int r = 0;       //initialize amount of int on the right of pivot
+   int pivot = elements[elements.length-1]; //pivot is last int in array
+   
+   //loop for counting numbers on left and right of pivot
+   for(int i = 0; i < elements.length-1; i++){
+     if(elements[i] <= pivot){
+       l++;
+     }
+     else{
+       r++;
+     }
+   }
+   
+   //create arrays for the partitions
+   int[] left = new int[l];
+   int[] right = new int[r];
+   
+   //reusing these
+   l=0;
+   r=0;
+   
+   //place the numbers in the right array
+   for(int i = 0; i < elements.length - 1; i++)
+   {
+        if(elements[i] <= pivot){
+            left[l] = elements[i];
+            l++;
+        }
+       else if(elements[i] > pivot){
+            right[r] = elements[i];
+            r++;
+         }
+   }
+   
+   //recursive call
+   quickSort(left);
+   quickSort(right);
+   
+   //loop to place the integers in the right order in the original array
+   for(int i = 0; i < l; i++){
+     elements[i] = left[i];
+   }
+   elements[l] = pivot;
+   for(int i = 0; i < r; i++){
+     elements[i+l+1] = right[i];
+   }
+   
+   
+   
+   
+   
+  
+  }
+}
+//
