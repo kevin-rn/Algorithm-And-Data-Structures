@@ -1,0 +1,51 @@
+
+import java.util.*;
+class Solution {
+  /**
+   * Computes whether the BinaryTree is complete.
+   *
+   * @param tree
+   *     the BinaryTree to check.
+   * @return true iff the BinaryTree is complete, else false.
+   */
+  public static boolean isTreeComplete(BinaryTree tree) {
+    // TODO
+     if (tree == null) 
+        return true; 
+  
+    // If index assigned to current node is more than 
+    // number of nodes in tree, then tree is not complete 
+      BinaryTree current;
+    Queue<BinaryTree> q = new LinkedList<BinaryTree>();
+    q.add(tree);
+    boolean endFull = false; 
+    
+    //Loop for the childes of a tree
+    while (q.peek() != null) {
+        current = q.remove();
+        
+        //checks if it does have a right but no left or a left but no right
+        if (endFull && (current.hasLeft() || current.hasRight()))
+          return false;
+        
+        //immediate check if it has a no left but not a right
+        if (!current.hasLeft() && current.hasRight())
+          return false;
+        
+        //checks if the current node has left else it sets the boolean to true
+        if (current.hasLeft())
+          q.add(current.getLeft());
+        else
+          endFull = true;
+         //checks if the current node has right else it sets the boolean to true
+        if (current.hasRight())
+          q.add(current.getRight());
+        else
+          endFull = true;
+    }
+    //returns true if it doesn't have child anymore ;)
+    return true;
+  
+  }
+}
+//
