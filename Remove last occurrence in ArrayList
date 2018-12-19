@@ -1,0 +1,61 @@
+package weblab;
+
+import java.util.*;
+
+class Solution {
+  /**
+   * Removes all elements from the ArrayList, using the removeLastOccurrence method.
+   *
+   * @param list
+   *     to remove the elements from.
+   */
+  public static void removeAll(ArrayList<Integer> list) {
+    int i = 0;
+    while(list.size() > 0){
+      
+      if(i != 10){
+       removeLastOccurrence(i, list);
+       i++;
+      }
+      else{
+        i = 0;
+      }
+    }
+  }
+
+  /**
+   * Takes an ArrayList and removes last occurrence of x,
+   * shifting the rest of the elements left.
+   * I.e. [5, 1, 5, 9, 8], with x = 5
+   * would result in: [5, 1, 9, 8].
+   * Note that this method does not return a new list.
+   * Instead, the list that is passed as a parameter is changed.
+   *
+   * @param list
+   *     to remove an element from.
+   * @param x
+   *     element value to look for
+   */
+  public static void removeLastOccurrence(int x, ArrayList<Integer> list) {
+    
+    int no = 0;
+    for(int i = list.size() - 1; i >= 0; i--)
+    {
+      
+      if(list.get(i) == x && no == 0)
+      {
+        list.remove(i);
+        no = 1;
+      }
+      
+      
+    }
+    
+    
+    
+    
+    
+    
+  }
+}
+//
