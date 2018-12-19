@@ -1,1 +1,117 @@
+class ArrayStack {
+  private Object[] elements;
+  private int size;
+  private int capacity;
 
+  /**
+   * Creates an empty ArrayStack with capacity 1.
+   */
+  public ArrayStack() {
+    elements = new Object[1];
+    capacity = 1;
+		size = 0;
+  }
+
+  /**
+   * @return The size of this ArrayStack.
+   */
+  public int size() {
+    return size;
+  }
+
+  /**
+   * @return `true` iff this ArrayStack is empty, `false` otherwise.
+   */
+  public boolean isEmpty() {
+    return size==0;
+  }
+
+  /**
+   * @return `true` iff the size is equal to the capacity, `false` otherwise.
+   */
+  public boolean isFull() {
+    return size==capacity;
+  }
+
+  /**
+   * @return the top element of the stack without removing it
+   */
+  public Object peek() throws EmptyStackException {
+    if (size == 0) {
+			throw new EmptyStackException();
+		}
+		return elements[size-1];
+  }
+
+  /**
+   * Adds `o` to the stack.
+   * If capacity of stack was too small, capacity is doubled and `o` is added.
+   *
+   * @param o
+   *     the element to add to the stack.
+   */
+  public void push(Object o) {
+    if (isFull()) {
+       capacity = 2 * capacity;
+			Object[] x = new Object[capacity];
+  		for (int i = 0; i < size; i++) {
+  			x[i] = elements[i];
+  		}
+	    elements = x;
+		}
+		elements[size] = o;
+		size++;
+  }
+
+  /**
+   * Removes the top element from the stack.
+   * If removing top would make the stack use less than 25% of its capacity,
+   * then the capacity is halved.
+   *
+   * @return the element which was at the top of the stack.
+   * @throws EmptyStackException
+   *     iff the queue is empty
+   */
+  public Object pop() throws EmptyStackException {
+    if (size == 0) {
+			throw new EmptyStackException();
+		}
+		Object x = peek();
+		elements[size-1] = null;
+		size--;
+		if(size<capacity/4){
+      capacity= capacity/2;
+      Object[] newelements = new Object [capacity];
+      for(int i=0;i<size;i++)
+          newelements[i] = elements[i];
+          elements = newelements;
+  
+  	}
+		return x;
+  }
+
+  /**
+   * @return a String representation of the ArrayStack
+   * Example output for ArrayStack with 2 elements and capacity 5:
+   * <ArrayStack[1,2]>(Size=2, Cap=5)
+   */
+  public String toString() {
+    StringBuilder sb = new StringBuilder();
+		sb.append("<ArrayStack[");
+		for (int i = 0; i < size-1; i++) {
+			sb.append(elements[i]);
+			sb.append(',');
+		}
+	if(size!=0){
+		sb.append(elements[size-1]);
+		}
+		sb.append("]>(Size="+size+", Cap="+elements.length+")");
+		return sb.toString();
+  }
+
+  // For testing, do not remove or change.
+  public Object[] getElements() {
+    return elements;
+  }
+}
+//
