@@ -1,0 +1,22 @@
+class Solution {
+  /**
+   * @param elements
+   *     - array of integers to be sorted.
+   */
+  public static void insertionSort(int[] elements) {
+    //loop to repeat through the array
+    for(int i = 0; i < elements.length; i++){
+      
+         int temp = elements[i]; //create temporary number to hold element at position i
+    		 int j=i-1;              //create j to hold previous index
+    		 //if index is equal or bigger than 0 and the current element is smaller than the previous
+    		while(j>=0 && temp < elements[j]){ 
+    		//set current elements as the previous
+    			elements[j+1] = elements[j];
+    			j--; //decrement index
+    		}
+    		elements[j+1] = temp; //set previous as the current element
+    }
+  }
+}
+//
