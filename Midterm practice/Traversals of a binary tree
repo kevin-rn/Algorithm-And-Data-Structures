@@ -1,0 +1,26 @@
+import java.util.*;
+ 
+class TreeIterator {
+  /**
+   * @param tree
+   *     The input BinaryTree.
+   * @param order
+   *     The order in which the binary tree nodes need to be returned: pre-order, in-order, or post-order.
+   * @return A list of all nodes of the tree, in the specified order.
+   */
+  public static List<BinaryTree> getAllNodesDF(BinaryTree tree, Order order) {
+    List<BinaryTree> nodes = new ArrayList<>();
+    if(tree == null) return nodes;
+    addNodesDF(tree, order, nodes);
+    return nodes;
+  }
+ 
+  public static void addNodesDF(BinaryTree tree, Order order, List<BinaryTree> list) {
+    if(order == Order.PRE) list.add(tree);
+    if(tree.hasLeft()) addNodesDF(tree.getLeft(), order, list);
+    if(order == Order.IN) list.add(tree);
+    if(tree.hasRight()) addNodesDF(tree.getRight(), order, list);
+    if(order == Order.POST) list.add(tree);
+  }
+}
+//
