@@ -1,0 +1,69 @@
+import java.util.*;
+
+class Stack<T> {
+  private MyQueue<T> q1 = new MyQueue<>();
+  private MyQueue<T> q2 = new MyQueue<>();
+  private int size;
+
+  /**
+   * @return true iff there are no elements left.
+   */
+  public boolean isEmpty() {
+    return size() == 0;
+ 
+  }
+
+  /**
+   * @return the number of elements in the stack.
+   */
+  public int size() {
+    return q1.size() + q2.size();
+  }
+
+  /**
+   * Adds an element to the stack.
+   *
+   * @param i
+   *     element to enqueue.
+   */
+  public void push(T i) {
+    size++;
+    
+    q2.enqueue(i);
+    while(!q1.isEmpty()){
+      q2.enqueue(q1.dequeue());
+
+    }
+    
+    MyQueue<T> q = q1;
+    q1 = q2;
+    q2 = q;
+  }
+
+  /**
+   * Removes the top element from the stack.
+   *
+   * @return the top element from the stack.
+   * @throws NoSuchElementException
+   *     iff the stack is empty.
+   */
+  public T pop() throws NoSuchElementException {
+    if(q1.isEmpty()) throw new NoSuchElementException();
+    T t = q1.dequeue();
+    size--;
+    return t;
+  }
+
+  /**
+   * Only returns (i.e. does not remove) the top element from the stack.
+   *
+   * @return the top element from the stack.
+   * @throws NoSuchElementException
+   *     iff the stack is empty.
+   */
+  public T top() throws NoSuchElementException {
+    if(q1.isEmpty()) throw new NoSuchElementException();
+    return q1.front();
+  }
+}
+//
