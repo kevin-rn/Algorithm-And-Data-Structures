@@ -14,7 +14,7 @@ class Solution {
     a[i] = a[j];
     a[j] = t;
   }
-
+ 
   /**
    * Restores the heap property in a heap represented as an array.
    * When the heap property is invalid at root,
@@ -31,24 +31,24 @@ class Solution {
     // index of left and right children
     int left = 2 * root + 1;
     int right = 2 * root + 2;
-
+ 
     int largest;
-
+ 
     if (left <= range && heap[left] > heap[root])
       largest = left;
     else
       largest = root;
-
+ 
     if (right <= range && heap[right] > heap[largest])
       largest = right;
-
+ 
     // heap property invalid at root
     if (largest != root) {
       swap(heap, root, largest);
       downHeap(heap, largest, range);
     }
   }
-
+ 
   /**
    * Turns an array of integers into a heap.
    * This is an in-place algorithm, the heap is built in the array itself.
@@ -58,14 +58,16 @@ class Solution {
    *     On return, this array represents a valid heap.
    */
   public static void heapify(int[] array) {
-    int n = array.length; 
-  
-        // Build heap (rearrange array) 
-        for (int i = n / 2 - 1; i >= 0; i--) 
-            downHeap(array, n, i); 
-            inPlaceHeapSort(array);
+    int startIndex = parent(array.length - 1);
+    for(int i = startIndex; i >= 0; i--) {
+      downHeap(array, i, array.length - 1);
+    }
   }
-
+ 
+  private static int parent(int j) {
+    return (j-1) / 2;
+  }
+ 
   /**
    * Sorts an array of integer numbers.
    * This is an in-place algorithm, the elements inside the array are being sorted without creating a copy of the array.
@@ -75,15 +77,17 @@ class Solution {
    *     On return, this array is sorted.
    */
   public static void inPlaceHeapSort(int[] array) {
-     // One by one extract an element from heap 
-        for (int i=array.length-1; i>=0; i--) 
-        { 
-            // Move current root to end 
-            swap(array, 0, i);
-  
-            // call max heapify on the reduced heap 
-            heapify(array, i, 0); 
-        } 
+    if(array.length <= 1) return;
+    heapify(array);
+    int max = array.length - 1;
+    IPHeapSort(array, max);
+  }
+ 
+  private static void IPHeapSort(int[] array, int max) {
+    if(max == 0) return;
+    swap(array, 0, max);
+    downHeap(array, 0, max - 1);
+    IPHeapSort(array, max - 1);
   }
 }
 //
