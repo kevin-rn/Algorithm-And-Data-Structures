@@ -4,20 +4,21 @@ class Solution {
   /**
    * @param arr1 ArrayList<Integer> array 1
    * @param arr2 ArrayList<Integer> array 2
-   * 
+   *
    * @return arr_common ArrayList<Integer> that has the common elements of arr1 and arr2
    */
   static ArrayList<Integer> findCommonElements(ArrayList<Integer> arr1, ArrayList<Integer> arr2) {
-    ArrayList<Integer> arr_common = new ArrayList<>();
-    
-    for(int i=0; i < arr1.size(); i++){
-      if(arr2.contains(arr1.get(i))){
-        arr_common.add(arr1.get(i));
+    ArrayList<Integer> arr_common = new ArrayList<Integer>();
+   
+    // find common elements in arr1 and arr2, add them to arr_common and return it
+    for(Integer num : arr1) {
+      int index = arr2.indexOf(num);
+      if(index != -1) {
+        arr_common.add(num);
+        arr2.remove(index);
       }
     }
-    
+   
     return arr_common;
   }
-}//
-
-//results into 2/3 spectest
+}
