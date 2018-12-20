@@ -1,72 +1,66 @@
-//gives 44/100 spectest
-
-
-
-
-
 class CDLList<T> {
   class Node {
     // Each Node object has these three fields
     private T element;
     private Node previous;
     private Node next;
-
+ 
     // Constructor: Creates a Node object with element = e, previous = p and next = n
     Node(T e, Node p, Node n) {
       element = e;
       previous = p;
       next = n;
     }
-
+ 
     // This function gets T e as input and sets e as the element of the Node
     public void setElement(T e) {
       element = e;
     }
-
+ 
     // This function returns the element variable of the Node
     public T getElement() {
       return element;
     }
-
+ 
     // This function gets Node n as input and sets the next variable of the current Node object as n.
     public void setNext(Node n) {
       next = n;
     }
-
+ 
     // This function returns the next Node
     public Node getNext() {
       return next;
     }
-
+ 
     // This function gets Node p as input and sets the previous variable of the current Node object as p.
     public void setPrevious(Node p) {
       previous = p;
     }
-
+ 
     // This function returns the previous Node
     public Node getPrevious() {
       return previous;
     }
   }
-
+ 
   // Each object in CDLList has one field head, which points to the starting Node of CDLList.
   private Node head;
-
+ 
   /**
    * Constructor: initialises the head field as null
    */
   public CDLList() {
     head = null;
   }
-
+ 
   /**
    * @return The element in the first Node of this CDLL. If the list is empty, this method returns null.
    */
   public T getFirst() {
-    if(head == null){return null;}
+    if(head == null) return null;
     return head.getElement();
   }
-
+ 
   /**
    * Adds element e in a new Node to the head of the list.
    *
@@ -74,47 +68,39 @@ class CDLList<T> {
    *     The element to add.
    */
   public void addFirst(T e) {
-    Node first = new Node(e, null, null);
-
-        if (head == null){            
-            first.setNext(first);
-            first.setPrevious(first);
-           head = first;
-        }
-        else{
-            first.setPrevious(head.getPrevious());
-            head.getPrevious().setNext(first);
-            head.setPrevious(first);
-            first.setNext(head);
-            head = first;        
-        }
+    if(head == null) {
+      head = new Node(e, null, null);
+      head.next = head;
+      head.previous = head;
+    }else{
+      head = addAfter(e, head.previous);
+    }
   }
-
+ 
   /**
    * Remove the first Node in the list and return its element.
    *
    * @return The element of the first Node. If the list is empty, this method returns null.
    */
   public T removeFirst() {
-    if(head== null){return null;}
-    
-    T x = head.getElement(); //store element of the head before 'removing' it
-    head.setElement(head.getNext().getElement()); //sets node after head as the new head element
-    head.setNext(head.getNext().getNext()); //change reference of headNExt to the one after the next
-    head.getNext().setPrevious(null); //set next references to null
-    head.getNext().setNext(null); //set the previous reference to null
-    head.getNext().getNext().setPrevious(head);//set the next.next reference to head instead of next
-    return x; //return element
+    if(head == null) return null;
+    if(head.next == head){
+      Node node = head;
+      head = null;
+      return node.getElement();
+    }
+    head = head.next;
+    return remove(head.previous);
   }
-
+ 
   /**
    * @return The element in the last Node of the CDLL. If the list is empty, this method returns null.
    */
   public T getLast() {
-    if(head == null){return null;}
-    return head.getPrevious().getElement();
+    if(head == null) return null;
+    return head.previous.getElement();
   }
-
+ 
   /**
    * Adds element e in a new Node to the end of the list.
    *
@@ -122,51 +108,57 @@ class CDLList<T> {
    *     The element to add.
    */
   public void addLast(T e) {
-        Node last = new Node(e, null, null);        
-
-        if (head == null){
-          last.setNext(last);
-          last.setPrevious(last);
-          head = last;
-
-        }
-        else{
-
-            last.setPrevious(head.getPrevious());
-            head.getPrevious().setNext(last);
-            head.setPrevious(last);
-            last.setNext(head);
-        }
+    if(head == null) {
+      head = new Node(e, null, null);
+      head.next = head;
+      head.previous = head;
+    }else{
+      addAfter(e, head.previous);
+    }
   }
-
+ 
   /**
    * Remove the last Node in the list and return its element.
    *
    * @return The element of the last Node. If the list is empty, this method returns null.
    */
   public T removeLast() {
-    if(head== null){return null;}
-    T x = head.getElement(); //store element of the head before 'removing' it
-    head.setElement(head.getPrevious().getElement()); //sets node after head as the new head element
-    head.setPrevious(head.getPrevious().getPrevious()); //change reference of headNExt to the one after the next
-    head.getPrevious().setNext(null); //set next references to null
-    head.getPrevious().setPrevious(null); //set the previous reference to null
-    head.getPrevious().getPrevious().setNext(head);//set the next.next reference to head instead of next
-    return x; //return element
+    if(head == null) return null;
+    if(head.next == head){
+      Node node = head;
+      head = null;
+      return node.getElement();
+    }
+    return remove(head.previous);
   }
-
+ 
+  private Node addAfter(T el, Node after) {
+    Node node = new Node(el, after, after.next);
+    after.next.previous = node;
+    after.next = node;
+    return node;
+  }
+ 
+  private T remove(Node node) {
+    node.previous.next = node.next;
+    node.next.previous = node.previous;
+    return node.getElement();
+  }
+ 
   /**
    * Moves the head reference to the next element.
    */
   public void rotateForward() {
-    head = head.getNext();
+    if(head == null) return;
+    head = head.next;
   }
-
+ 
   /**
    * Moves the head reference to the previous element.
    */
   public void rotateBackward() {
-    head = head.getPrevious();
+    if(head == null) return;
+    head = head.previous;
   }
 }
 //
