@@ -1,0 +1,46 @@
+import java.util.*;
+
+class Solution {
+
+  /**
+   * Takes an ArrayList of integers and adds all possible permutations to a Set that will be returned.
+   *
+   * @param list
+   *     - the original ArrayList that has to be permuted.
+   * @return a Set with all possible permutations of the original ArrayList.
+   */
+  public static Set<PermList<Integer>> permute(PermList<Integer> list) {
+    
+    Set<PermList<Integer>> result = new HashSet<PermList<Integer>>();
+    //if list is empty return empty Set
+       if(list == null||list.isEmpty()){ return result; }
+     	  //Add empty list
+      	result.add(new PermList<Integer>());
+       
+       //loop through the array
+      	for (int i = 0; i < list.size(); i++) {
+      		//create temporary Set to hold the permutations
+      		Set<PermList<Integer>> current = new HashSet<PermList<Integer>>();
+       
+                  //Iterator
+              		for (PermList<Integer> l : result) {
+              		    
+                			for (int j = 0; j < l.size()+1; j++) {
+                        //add it for different positions
+                				l.add(j, list.get(i));
+                				//create temporary PermList to hold the the values of I
+                				PermList<Integer> temp = new PermList<Integer>(l);
+                				//add it to the temporary Set
+                				current.add(temp);
+                        //remove the number from l
+                				l.remove(j);
+                			}
+              		}
+          //Set the permutation list as result
+      		result = new HashSet<PermList<Integer>>(current);
+      	}
+       //return the result
+      	return result;
+  }
+}
+//
