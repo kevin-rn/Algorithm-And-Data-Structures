@@ -1,0 +1,35 @@
+class LeavesCounter {
+  /**
+   * @param tree
+   *     The input BinaryTree.
+   * @return the amount of leaves of the tree.
+   */
+  public static int countLeaves(BinaryTree tree) {
+   if(tree == null) return 0;
+   int count = 0;
+
+     //check if tree doesnt have childs, then increment number
+     if(!(tree.hasLeft()) && (!(tree.hasRight()))){
+       count++;
+     }
+     //check if tree has left child but no right child, return recursion on left child
+     if(tree.hasLeft() && (!(tree.hasRight()))){
+       return countLeaves(tree.getLeft());
+     }
+     //check if tree has right child but no left child, return recursion on right child
+     if(tree.hasRight() && (!(tree.hasLeft()))){
+       return countLeaves(tree.getRight());
+     }
+     //check if tree had both childs, return recursion on both childs
+     if(tree.hasLeft() && tree.hasRight()){
+        return countLeaves(tree.getLeft()) + countLeaves(tree.getRight());
+     }
+     
+   
+   
+   return count;
+   
+   
+  }
+}
+//
