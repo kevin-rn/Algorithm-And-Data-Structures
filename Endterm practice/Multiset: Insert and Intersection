@@ -1,0 +1,100 @@
+import java.util.*;
+
+class MultiSet extends AbstractMultiSet {
+  /**
+   * Creates a new MultiSet that will contain copies of the elements from `elements`.
+   * The list of elements will be sorted in the constructor of the superclass.
+   *
+   * @param elements
+   *     The list of elements that this MultiSet will contain.
+   */
+  public MultiSet(List<Integer> elements) {
+    super(elements);
+  }
+
+  /**
+   * Creates a new, empty MultiSet.
+   */
+  public MultiSet() {
+    super();
+  }
+
+  /**
+   * Inserts an element into this MultiSet, preserving the order of the elements.
+   *
+   * @param element
+   *     The element to insert into this MultiSet.
+   */
+  @Override
+  public void insert(int element) {
+    ArrayList<Integer> arr = (ArrayList<Integer>) this.elements;
+    int index = 0;
+    for (int i = 0; i < arr.size(); i++) {
+      if (arr.get(index) > element) {
+        break;
+      }
+      index++;
+    }
+    arr.add(index, element);
+  }
+
+  /**
+   * Calculates the intersection between `this` and `other`.
+   * In the intersection of `this` and `other`, the frequency of each distinct element in the result set
+   * is defined as follows:
+   * Given `C = A.intersection(B)`. Then for every integer `i`, `C.count(i) == min(A.count(i), B.count(i))`.
+   *
+   * @param other
+   *     the other multiset to take the intersection with.
+   * @return The intersection of multisets `this` and `other`.
+   */
+  @Override
+  public AbstractMultiSet intersection(AbstractMultiSet other) {
+     if (other == null) {
+      return new MultiSet();
+    }
+    ArrayList<Integer> result = new ArrayList<>();
+   
+    ArrayList<Integer> elements1 = (ArrayList<Integer>) this.getElements();
+    ArrayList<Integer> elements2 = (ArrayList<Integer>) other.getElements();
+   
+    int index1 = 0;
+    int index2 = 0;
+   
+    while (index1 != elements1.size() && index2 != elements2.size()) {
+      if (elements1.get(index1) < elements2.get(index2)) {
+        index1++;
+      } else if (elements1.get(index1) > elements2.get(index2)) {
+        index2++;
+      } else { // elements1.get(index1) == elements2.get(index2);
+        result.add(elements1.get(index1));
+        index1++;
+        index2++;
+      }
+    }
+   
+    return new MultiSet(result);
+  }
+}
+
+
+/*
+Implement the insert and intersection methods of a sorted multiset.
+
+A multiset is a set in which elements can occur multiple times. In this case, the sorted multiset contains integer elements stored as a sorted list. All methods you implement on the sorted multiset should guarantee that the underlying list of elements remains sorted. The constructor of the class AbstractMultiSet defined in the visible Library code sorts the elements list.
+
+You will need to extend AbstractMultiSet with two methods:
+
+    insert(int element), which inserts element into the sorted MultiSet, preserving the order of the elements.
+    intersection(AbstractMultiSet other), which returns a new sorted MultiSet containing the elements present in both sets. Specifically, the frequency of each distinct element is defined as follows:
+
+        Given C = A.intersection(B).
+        Then for every integer element i,
+        C.count(i) == min(A.count(i), B.count(i)),
+        where count(int i) returns the number of occurrences of element i in a multiset.
+
+    See the visible tests for an example.
+
+You should treat null as an empty MultiSet.
+
+*/
