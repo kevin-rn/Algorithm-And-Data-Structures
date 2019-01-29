@@ -1,0 +1,92 @@
+import java.util.ArrayList;
+import java.util.List;
+
+class MySet<E extends Comparable<E>> extends LibrarySet<E> {
+
+	List<E> list;
+
+	public MySet() {
+		this.list = new ArrayList<>();
+	}
+
+	public MySet(List<E> list) {
+		this.list = list;
+	}
+
+	@Override
+	protected List<E> getList() {
+		return this.list;
+	}
+
+	/**
+	 * Difference of two sets. Should use the fact that they have sorted lists.
+	 * 
+	 * @param that
+	 *            set to take the difference with.
+	 * @return a set containing all elements of this, which do not belong to that
+	 */
+	public MySet<E> difference(MySet<E> that) {
+	  if(that.getList().isEmpty()) return this;       //if the other set is empty everything in 'this' is the difference
+	  
+	  List<E> result = new ArrayList<E>();                      
+    int s1 = this.getList().size();
+    int s2 = that.getList().size();
+    boolean check = false;                       //boolean check in case the innerloop is done and not the same element was found
+    
+    for(int i=0; i < s1; i++){                   //outerloop for 'this'
+
+	      for(int j = 0; j < s2; j++){            //innerloop for 'that'
+    	      E e1 = this.getList().get(i);       //placing elements as variables
+    	      E e2 = that.getList().get(j);
+    	      
+    	      if( e1.compareTo(e2) == 0 ){break;}  //if its the same stop innerloop, go to next element in outerloop
+  	      	if((j+1) == s2){ check = true;}      //if innerloop is done set check to true
+	     }
+	     if(check){                                //if check is true this means we have looped without finding same number  
+	       result.add(this.getList().get(i)); 
+	       check = false;
+	     }
+    }
+    return new MySet<E>(result);
+	}
+}
+
+/* !!!!! THIS IS A SHORTER VERSION !!!!!!!!!
+
+	public MySet<E> difference(MySet<E> that) {
+	  if(that.getList().isEmpty()) return this;       
+	    
+	 List<E> result = new ArrayList<>();                      
+   
+    for(int i=0; i < this.getList().size(); i++){                  
+         E e = this.getList().get(i);
+    	      
+    	   if(!that.list.contains(e)) result.add(e);
+	     }
+	     
+    return new MySet<E>(result);
+	}
+}
+
+--------------------------------------------------------------------------------------------------------------------------------------
+In a second step to implement the Set ADT, you implement difference(MySet<E> that), which returns a new set, containing all the elements from the current set, which do not belong to set that.
+
+Code requirement: Your implementation needs to exploit the sorting of the lists representing both input sets. This sorting allows you to build the list representing the result set from the start to the end. You should add elements to this result list first, and create the result set from that list.
+
+To manipulate the result list, you can use the following methods:
+
+    new ArrayList<>(int c) constructs an empty list with initial capacity c.
+    boolean add(E e) appends e to the end of the list.
+
+Code requirement: You should not use void add(E e, int i) as described in the previous insertion question, since elements in the resulting list are never shifted to another position.
+
+Code requirement: You should also not sort the list after you built it, but build the list in a way its elements are already sorted.
+
+To query the underlying lists of the input sets, i.e. this.list and that.list, you can use the following methods:
+
+    boolean isEmpty() returns true if this list contains no elements.
+    int size() returns the number of elements in this list.
+    E get(int i) returns the element at the ith position in the list.
+
+Also remember, you can invoke e1.compareTo(e2) to compare two elements e1 and e2. This will result in a negative integer, zero, or a positive integer depending on whether e1 is less than, equal to, or greater than e2 respectively.
+*/
