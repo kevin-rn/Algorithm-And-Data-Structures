@@ -1,0 +1,146 @@
+import java.util.*;
+
+class Map {
+  protected ArrayList<Entry> arr;
+
+  /**
+   * Constructor of the map. Represented by a sorted ArrayList.
+   */
+  public Map() {
+    arr = new ArrayList<>();
+  }
+
+  /**
+   * Takes a String as input and finds the corresponding value in the map.
+   * If the Entry with this key can't be found, this will return -1.
+   *
+   * @param s
+   *     - Key that you are looking for.
+   * @return - value corresponding to the Entry found.
+   */
+  public int get(String s) {
+       if (s == null) {
+      return -1;
+    }
+    int low = 0;
+    int high = arr.size() - 1;
+    int mid = (low + high) / 2;
+    while (low <= high) {
+      mid = (low + high) / 2;
+      if (arr.get(mid).getKey().compareTo(s) < 0) {
+        low = mid + 1;
+      } else if (arr.get(mid).getKey().compareTo(s) > 0) {
+        high = mid - 1;
+      } else {
+        return arr.get(mid).getValue();
+      }
+    }
+    return -1;
+     
+    }
+
+  /**
+   * Left biased union of two maps, adds all entries from the map given as input to this map, keeping the maps sorted alphabetically on the key.
+   * If a duplicate key occurs, takes the value from this map.
+   *
+   * @param m
+   *     - other map used for the union
+   */
+  public Map union(Map m) {
+   Map result = new Map();
+     if (m == null) { return this; }
+   
+    int arr1 = 0;
+    int arr2 = 0;
+   
+     while (arr1 != this.arr.size() || arr2 != m.arr.size()) {
+        if (arr1 == this.arr.size()) {
+          result.arr.add(m.arr.get(arr2));
+          arr2++;
+        } else if (arr2 == m.arr.size()) {
+          result.arr.add(this.arr.get(arr1));
+          arr1++;
+        } else if (this.arr.get(arr1).getKey().compareTo(m.arr.get(arr2).getKey()) > 0) {
+          result.arr.add(m.arr.get(arr2));
+          arr2++;
+        } else if (this.arr.get(arr1).getKey().compareTo(m.arr.get(arr2).getKey()) < 0) {
+          result.arr.add(this.arr.get(arr1));
+          arr1++;
+        } else {
+          result.arr.add(this.arr.get(arr1));
+          arr1++;
+          arr2++;
+        }
+    }
+
+      return result;
+}
+}
+/*
+A map is a data structure that assigns values to keys. In this exercise, we consider the values to be integers, and the keys to be string.
+
+We represent maps as array lists of key/value pairs (represented by the class Entry). These key/value pairs are stored in a way such that they are sorted by keys. You should ensure that all operations on maps you implement make sure that the array list remains sorted.
+
+In this exercise, you should implement two methods on maps:
+
+    get(String s) – This method takes a key and returns the associated value as int. The worst case run-time complexity of this method has to be O(logn)
+
+where n
+
+is the number of entries in the map.
+
+union(Map m) – This method takes another Map and performs a left-biased union (i.e. when a key has a value in both maps, it should take the value from the left map) with this as left map and m as right map. The worst case run-time complexity of this method has to be O(n1+n2)
+where n1 and n2
+
+    are the number of entries in the input maps.
+
+You should treat null as an empty Map.
+
+Every Entry has a String as key and an Integer as value.
+
+class Entry {
+  public Entry(String s, Integer v);
+  public String getKey();
+  public int getValue();
+}
+
+
+---------------------------------------Library------------------------------------------------------------
+
+class Entry {
+  public final String key;
+  public final Integer value;
+
+  public Entry(String s, Integer v) {
+    key = s;
+    value = v;
+  }
+
+  public boolean equals(String s) {
+    return s == null && key == null || key.equals(s);
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    return this == o || o != null && getClass() == o.getClass() && this.equals(((Entry) o).key) && this.value == ((Entry) o).getValue();
+  }
+
+  public String getKey() {
+    return key;
+  }
+
+  public int getValue() {
+    return value;
+  }
+}
+
+
+
+
+*/
+
+
+
+   
+
+
