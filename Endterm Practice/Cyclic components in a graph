@@ -1,0 +1,91 @@
+import java.util.Collection;
+import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
+
+class Solution {
+  /**
+   * The recursive helper function that performs the depth-first search.
+   * @param g the graph
+   * @param prev the vertex via which we have reached the vertex u (can be null)
+   * @param u the vertex we are currently visiting
+   * @param known the vertexes that we have already visited
+   */
+  public static boolean componentHasCycle(Graph g, Vertex prev, Vertex u, Set<Vertex> known) {
+    known.add(u);
+    
+    boolean loop = false;
+    for(Vertex nb : g.getNeighbours(u)) {
+      if(nb != prev) {
+        if(known.contains(nb)) { loop = true; }
+        else{ componentHasCycle(g, u, nb, known);
+        }
+      }
+    }
+    return loop;
+  }
+
+  public static int numCyclicComponents(Graph g) {
+    Set<Vertex> known = new TreeSet<>();
+    int count = 0;
+    for(Vertex v : g.getAllVertices()) {
+      if(!known.contains(v)) {
+        if(componentHasCycle(g, null, v, known)) count++;
+      }
+    }
+    return count;
+  }
+}
+
+/**
+ * DO NOT MODIFY
+ */
+interface Vertex extends Comparable<Vertex> {
+  /**
+   * @return the id of the vertex
+   */
+  public int getId();
+}
+
+/**
+ * Interface for a generic graph. You may assume that our implementation is an
+ * undirected graph.
+ */
+interface Graph {
+  /**
+   * @param id
+   *            to look for a vertex by.
+   * @return the vertex or null if not found.
+   */
+
+  public Vertex getVertexById(int id);
+  /**
+   * Returns the neighbours in a sorted collection by id
+   *
+   * @param v
+   *            node to get the neighbours of.
+   * @return sorted collection of neighbours.
+   */
+  public List<Vertex> getNeighbours(Vertex v);
+
+  /**
+   * @return an unsorted collection of all vertices in the graph.
+   */
+  public Collection<Vertex> getAllVertices();
+}
+/*
+Implement a method int numCyclicComponents(Graph g) that computes the number of connected components of an undirected graph g that contain a cycle.
+
+REQUIREMENTS:
+
+    Your solution should be able to handle graphs with self-loops (self-loops are cycles).
+    Your solution should not be able to handle graphs with parallel edges.
+    You should make use of a depth-first search, for which you need to implement the recursive helping function boolean componentHasCycle(Graph g, Vertex prev, Vertex u, Set<Vertex> known).
+
+Hint: note that a graph has a cycle if a back edge occurs during the depth-first search.
+
+Below the skeleton code (after DO NOT MODIFY), we provide you the interfaces for Vertex and Graph, which have full implementations in the hidden library code.
+
+With this implementation, you cannot label nodes or edges. Instead, you need to maintain the colored nodes in a set. This set can be instantiated with a TreeSet, which stores the elements of a set in a height-balanced search tree. To add a node v to the set known, you call known.add(v). To check if a vertex is already contained in the set known, you call known.contains(v).
+
+*/
