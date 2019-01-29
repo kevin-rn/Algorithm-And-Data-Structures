@@ -1,0 +1,65 @@
+import java.util.ArrayList;
+import java.util.List;
+
+class MySet<E extends Comparable<E>> extends LibrarySet<E> {
+
+	List<E> list;
+
+	public MySet() {
+		this.list = new ArrayList<>();
+	}
+
+	public MySet(List<E> list) {
+		this.list = list;
+	}
+
+	@Override
+	protected List<E> getList() {
+		return this.list;
+	}
+	
+	/**
+	 * Adds an element to the sorted list that represents the set. 
+	 * 
+	 * Note: the list should remain sorted and contain no duplicates.
+	 * 
+	 * @param element
+	 *            element to add.
+	 */
+	public void add(E element) {
+	  if(list.isEmpty()) list.add(element);
+	  
+	  for(int i =0; i < list.size(); i++){
+	    E e2 = list.get(i);
+  	   if(element.compareTo(e2) < 0){ 
+  	    list.add(i, element);
+  	    break;
+  	   }
+  	   else if(element.compareTo(e2) == 0){
+  	     break;
+  	   }
+  	   else if(element.compareTo(e2) > 0){
+  	     if( (i+1) == list.size()){
+  	     list.add(i+1, element);
+  	     break;
+  	     }
+  	   }
+	  }
+	}
+}
+/*
+In a first step to implement the Set ADT, you implement add(E e), which adds an element e to the set. Addition of an element needs to avoid duplicate entries and to preserve the sorting of the list of elements.
+
+To enable a sorted list representation, the elements of the set need to be comparable with other elements of the list. Thus, the class MySet you implement is parametrised with an element type E, which is required to extend Comparable<E>. To compare two elements e1 and e2, you can invoke e1.compareTo(e2). This will result in a negative integer, zero, or a positive integer depending on whether e1 is less than, equal to, or greater than e2 respectively.
+
+To query and manipulate the underlying list, you can use the following methods:
+
+    boolean isEmpty() returns true if this list contains no elements.
+    int size() returns the number of elements in this list.
+    E get(int i) returns the element at the ith position in the list.
+    boolean add(E e) appends e to the end of the list.
+    void add(int i, E e) inserts e at the ith position in the list. Shifts the element currently at that position (if any) and any subsequent elements to the right.
+
+Code requirement: You should not sort the list representation after you inserted the element. Instead, you should insert the element in a way that the list remains sorted.
+
+*/
