@@ -1,0 +1,81 @@
+interface Table {
+	/**
+	 * @param index
+	 *            to find the string of.
+	 * @return the string at the given index in the table.
+	 */
+	public String getString(int index);
+
+	/**
+	 * @return The size of the table.
+	 */
+	public int size();
+}
+
+class Solution extends MyHashTable {
+
+	public Solution(String[] table) {
+		super(table);
+	}
+
+	/**
+	 * Does a linear probe of the hashtable.
+	 *
+	 * @param msg
+	 *            to find in the table.
+	 * @param hash
+	 *            hash of msg.
+	 * @return the index the string is found at or -1 if it is not in there.
+	 */
+	public int linearProbe(String msg, int hash) {
+	     for(int i = 0; i < size(); i++){ 
+	       int index = (hash + i) % size(); 
+  	     if(getString(index).equals(msg)){ 
+  	       return index; 
+  	     } 
+	  }
+		return -1;
+	}
+
+	/**
+	 * Does a hashing probe of the hashtable.
+	 *
+	 * @param msg
+	 *            to find in the table.
+	 * @param hash1
+	 *            hash1 of msg.
+	 * @param hash2
+	 *            hash2 of msg.
+	 * @return the index the string is found at or -1 if it is not in there.
+	 */
+	public int hashProbe(String msg, int hash1, int hash2) {
+	     hash2++;                                             //
+	  for(int i = 0; i < size(); i++){ 
+	      
+	       int index = (hash1 + i*hash2) % size();            
+  	     if(getString(index).equals(msg)){ 
+  	       return index; 
+  	     } 
+  	      
+	  }
+		return -1;
+	}
+}
+/*
+In the second sub-assignment, you implement two different probing strategies.
+
+    linearProbe() should use linear probing to find a string msg in a hash table, starting from its hash value hash.
+
+    hashProbe() should use double hashing to find a string msg in a hash table, starting from its first hash value hash1, and using its second hash value hash2 for probing.
+
+Both methods should return -1, when the string cannot be found in the table.
+
+The underlying hash table implements two methods:
+
+    getString() returns the string stored at a given index in the table.
+    size() returns the size of the hash table.
+
+Remember, s1.equals(s2) checks two strings s1 and s2 for equality.
+
+Note: MyHashTable implements Table.
+*/
