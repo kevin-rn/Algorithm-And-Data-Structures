@@ -1,0 +1,53 @@
+import java.util.*;
+
+class Solution {
+  /**
+   * Sorts a list of words using MSD radix sort.
+   *
+   * @param words
+   *     The list of words to sort.
+   * @return The sorted list of words.
+   * @throws NullPointerException
+   *     If `words` equals `null`.
+   */
+  static List<String> radixSortMSD(List<String> words) {
+    if (words == null)
+      throw new NullPointerException();
+    
+    return sort(words, 0);
+  }
+  
+  static LinkedList<String> sort(List<String> words, int index) {
+    
+    LinkedList<String> solution = new LinkedList<String>();
+    @SuppressWarnings("unchecked")
+    LinkedList<String>[] buckets = new LinkedList[26];
+    
+    for (int i = 0; i < 26; i++)
+      buckets[i] = new LinkedList<String>();
+    
+    for (String i : words) {
+      if (i.length() - 1 < index)
+        solution.add(i);
+    }
+    
+    for (String i : words) {
+      if (i.length() - 1 >= index) {
+        buckets[(int) i.charAt(index) - (int)'a'].add(i);
+      }
+    }
+    
+    for (int i = 0; i < 26; i++)
+      if (buckets[i].size() > 0)
+        buckets[i] = sort(buckets[i], index + 1);
+    
+    
+    for (int i = 0; i < 26; i++)
+      for(String j : buckets[i])
+        solution.add(j);
+    
+    return solution;
+  }
+  // Please consider subscribing to Pewdiepie. Thank you! :)
+}
+//
