@@ -1,0 +1,38 @@
+import java.util.*;
+
+class Solution {
+  /**
+   * Counts the number of vertices in the same connected component as v in graph g.
+   * This is done using depth first search.
+   *
+   * Returns 0 if the graph or vertex is null
+   *
+   * @param g
+   *     The graph to count vertices in.
+   * @param v
+   *     The vertex to start counting at.
+   * @return the number of vertices in the same connected component.
+   */
+  public static int countVertices(Graph g, Graph.Vertex v) {
+    // TODO
+    Stack<Graph.Vertex> stack = new Stack<Graph.Vertex>();
+    if(g == null || v == null) return 0;
+    List<Graph.Vertex> known = new ArrayList<>();
+    known.add(v);
+    stack.push(v);
+    while(!stack.isEmpty()) {
+      Graph.Vertex u = stack.pop();
+      for(Graph.Vertex i : g.getNeighbours(u)) {
+        if(!known.contains(i)) {
+          known.add(i);
+          stack.push(i);
+        }
+      }
+    }
+    
+    
+    return known.size();
+  }
+  
+  
+}
