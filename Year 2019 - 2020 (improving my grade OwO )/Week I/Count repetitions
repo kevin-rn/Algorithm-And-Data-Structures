@@ -1,0 +1,50 @@
+/*
+Implement a method count which, given an array of integer elements, returns another array containing the number of occurrences of each integer {0, ..., r} in the input array, where r is an integer to show the upper boundary of the integers that you need to count.
+
+The returned array of counts will be of size r + 1, where the element at each index i corresponds to the number of occurrences of integer i (with i in {0, ..., r}).
+
+Elements in the input array outside of the integer range from 0 to r can be ignored.
+
+For example, given the input [0, 8, 1, 3, 1, 3, 10, 3] with r is 4, the output should be [1, 2, 0, 3, 0].
+
+If the input array is null or of length 0, this will return null.
+
+Space requirements: Method count should only use additional space for the count array.
+
+Time requirements: The counts should be calculated in a single pass through the input array.
+*/
+
+
+class Solution {
+
+  /**
+   * Calculates the number of occurrences of integers from the range
+   * {0, ..., r} within a given array of integer elements. Returns
+   * the array of counts: a new array of integers of size r + 1, where the
+   * element at index i denotes the number occurrences of elements equal
+   * to i in the given input array (with i in {0, ..., r}).
+   * If the input array is null or of length 0, this will return null.
+   *
+   * @param arr the array of integer elements to be counted.
+   * @param r the integer indicating the last element of the range.
+   * @return a new array containing the number of occurrences of each
+   * integer {0, ..., r} in the input array (index i has the
+   * count of elements equal to i in the input array, with i
+   * in {0, ..., r})
+   */
+  public static int[] count(int[] arr, int r) {
+    if(arr == null || arr.length == 0) return null;
+    int[] count = new int[r+1];
+    
+    for(int i = 0; i < arr.length; i++){
+      for(int j =0; j <= r; j++) {
+        if(arr[i] == j) {
+          count[j]++;
+        }
+      }
+      
+    }
+    return count;
+  }
+}
+
