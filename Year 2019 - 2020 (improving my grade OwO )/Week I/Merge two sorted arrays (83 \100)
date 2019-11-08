@@ -1,0 +1,60 @@
+/*
+Implement a method merge that, given two arrays of sorted integer elements, returns a new sorted array with all the elements of the two input arrays.
+
+Assume that the elements in both input arrays are sorted in non-decreasing order (e.g. [0, 1, 2, 2] and [1, 2, 3, 3, 4, 5]). The returned “merged” array must keep this property (e.g. [0, 1, 1, 2, 2, 2, 3, 3, 4, 5]).
+
+Duplicates are allowed in both the input and the output.
+
+If either one of the arrays are null, return the non-null array as a copy, if both arrays are null, the result should be null as well.
+
+Efficiency requirement: the arrays should be merged in a single pass over the arrays.
+*/
+
+//import java.util.*;
+
+class Solution {
+
+  /**
+   * Merges two sorted arrays such that the resulting array has all elements
+   * from both arrays and is also sorted. Assumes that the elements in the
+   * given arrays are sorted in non-decreasing order. If there are duplicate
+   * elements in the input arrays, these should also be present in the
+   * resulting array. If both arrays are null the result should be null, or a
+   * copy of the non-null array if only one is null.
+   *
+   * Efficiency requirements: merge the two arrays in a single pass.
+   *
+   * @param arr1 first sorted array to be merged
+   * @param arr2 second sorted array to be merged
+   * @return sorted array containing all elements from both arrays
+   */
+  public static int[] merge(int[] arr1, int[] arr2) {
+    if((arr1 == null || arr1.length == 0)  && (arr2 == null || arr2.length == 0)) return null;
+    if(arr1 == null || arr1.length == 0) return arr2;
+    if(arr2 == null || arr2.length == 0) return arr1;
+    
+    int[] result = new int[arr1.length + arr2.length];
+    int i =0, j=0, r=0;
+
+    while(true) {
+      if(i < arr1.length && j < arr2.length){
+        if(arr1[i] < arr2[j]){
+          result[r++] = arr1[i++];
+        }  else {
+          result[r++] = arr2[j++];
+        }
+        
+      } else if(i < arr1.length) {
+        result[r++] = arr1[i++];
+        
+      } else if(j < arr2.length) {
+        result[r++] = arr2[j++];
+        
+      } else break;
+      
+    }
+    return result;
+  }
+  
+}
+
