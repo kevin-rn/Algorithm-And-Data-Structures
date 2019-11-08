@@ -1,0 +1,30 @@
+/*
+Implement a method named reverse that, given an array of integer elements, reverses the order of its elements in-place.
+
+In-place means that you reverse the order of the elements in the array itself, without using an auxiliary array or any other additional data structures.
+
+When the array is null nothing should happen and the algorithm should terminate.
+
+For example: given the array [1, 2, 3, 4, 5], the expected result would be [5, 4, 3, 2, 1].
+*/
+
+class Solution {
+
+  /**
+   * Reverses the order of the elements of the given array.
+   *
+   * @param arr
+   * the array to reverse
+   */
+  public static void reverse(int[] arr) {
+    if(arr == null || arr.length == 0) return;
+    
+    for(int i = 0, j = arr.length-1; i < j; i++, j--) {
+      int temp = arr[i];
+      arr[i] = arr[j];
+      arr[j] = temp;
+
+    }
+  }
+}
+
