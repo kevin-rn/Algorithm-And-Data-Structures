@@ -27,8 +27,8 @@ class Solution {
    */
   public static int[] merge(int[] arr1, int[] arr2) {
     if(arr1 == null  && arr2 == null) return null;
-    if(arr1 == null && arr2 != null) return copy(arr2);
-    if(arr2 == null && arr1 != null) return copy(arr1);
+    if(arr1 == null && arr2 != null) return arr2.clone();
+    if(arr2 == null && arr1 != null) return arr1.clone();
     
     int[] result = new int[arr1.length + arr2.length];
     int i =0, j=0, r=0;
@@ -52,19 +52,10 @@ class Solution {
     }
     return result;
   }
-  
-  /**
-  *Copies array into new array
-  */
-  public static int[] copy(int[] arr) {
-    int[] copy = new int[arr.length];
-    for(int i =0; i<arr.length; i++) {
-      copy[i] = arr[i];
-    }
-    return copy;
-  }
-  
+
 }
+
+
 
 
 
