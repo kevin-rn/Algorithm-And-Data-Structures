@@ -9,9 +9,6 @@ If either one of the arrays are null, return the non-null array as a copy, if bo
 
 Efficiency requirement: the arrays should be merged in a single pass over the arrays.
 */
-
-//import java.util.*;
-
 class Solution {
 
   /**
@@ -29,14 +26,14 @@ class Solution {
    * @return sorted array containing all elements from both arrays
    */
   public static int[] merge(int[] arr1, int[] arr2) {
-    if((arr1 == null || arr1.length == 0)  && (arr2 == null || arr2.length == 0)) return null;
-    if(arr1 == null || arr1.length == 0) return arr2;
-    if(arr2 == null || arr2.length == 0) return arr1;
+    if(arr1 == null  && arr2 == null) return null;
+    if(arr1 == null && arr2 != null) return copy(arr2);
+    if(arr2 == null && arr1 != null) return copy(arr1);
     
     int[] result = new int[arr1.length + arr2.length];
     int i =0, j=0, r=0;
 
-    while(true) {
+    while(r < result.length) {
       if(i < arr1.length && j < arr2.length){
         if(arr1[i] < arr2[j]){
           result[r++] = arr1[i++];
@@ -50,11 +47,24 @@ class Solution {
       } else if(j < arr2.length) {
         result[r++] = arr2[j++];
         
-      } else break;
+      }
       
     }
     return result;
   }
   
+  /**
+  *Copies array into new array
+  */
+  public static int[] copy(int[] arr) {
+    int[] copy = new int[arr.length];
+    for(int i =0; i<arr.length; i++) {
+      copy[i] = arr[i];
+    }
+    return copy;
+  }
+  
 }
+
+
 
