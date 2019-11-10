@@ -30,19 +30,18 @@ IMPORTANT: You are not allowed to use any sorting algorithm from the Java librar
 
 
 class Solution {
-  public static void stableSort(String[][] table, int column) {
-    if(table == null) return;
-    
-    for(int i = 0; i < table.length; i++) {
-      int min =i;
-       for(int j = i+1 ; j < table.length; j++) {
-        if(table[min][column].compareTo(table[j][column]) > 0) min = j;
-      }
-      String[] temp = table[min];
-      table[min] = table[i];
-      table[i] = temp;
+public static void stableSort(String[][] table, int column) {
+        for (int i = 1; i < table.length; i++) {
+            for(int j = i ; j > 0 ; j--){
+                if(table[j][column].compareTo(table[j-1][column]) < 0){
+                    String[] temp = table[j];
+                    table[j] = table[j-1];
+                    table[j-1] = temp;
+                }
+            }
+        }
     }
-    
-  }
 }
+
+
 
