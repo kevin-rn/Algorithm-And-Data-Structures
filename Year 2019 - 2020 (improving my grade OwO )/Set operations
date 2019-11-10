@@ -1,0 +1,116 @@
+/*
+In this exercise, you are expected to implement the class MySet, which extends HashSet<String> (from java.util). HashSet<String> has the following methods and you are expected to use them while implementing MySet:
+
+add(s : String)      : boolean 
+contains(o : Object) : boolean
+isEmpty()            : boolean
+iterator()           : Iterator
+remove(o : Object)   : boolean
+size()               : int
+
+You are expected to implement the following methods for MySet:
+
+    union creates a MySet with all elements from this and that,
+    intersection creates a MySet with all elements from this, which are also in that,
+    difference creates a MySet with all elements from this, which are not in that.
+    exclusiveOr creates a MySet with all elements from this and that, excluding elements that are in both.
+    toString() returns a string representation of the current set in the following manner: <MySet{Delft,Rotterdam,Leiden}>.
+
+Whenever an argument is null, it should be treated as an empty set.
+*/
+
+import java.util.*;
+
+class MySet extends HashSet<String> {
+  private static final long serialVersionUID = 1L;
+
+  public MySet() {
+    super();
+  }
+
+  /**
+   * @return the union of the elements of this and that
+   */
+  public MySet union(MySet that) {
+    MySet result = new MySet();
+    for (String s : this){ 
+      result.add(s);}
+    
+    if (that != null){
+      for (String s : that) 
+        result.add(s);} 
+    
+    
+    return result;
+  }
+
+  /**
+   * @return the intersection of the elements of this and that
+   */
+  public MySet intersection(MySet that) {
+    MySet result = new MySet();
+    
+     if (that != null){
+      for (String s : this) 
+        if(that.contains(s))
+          result.add(s);}
+    
+    return result;
+  }
+
+  /**
+   * @return the difference of the elements of this and that
+   */
+  public MySet difference(MySet that) {
+    MySet result = new MySet();
+       if (that != null){
+      for (String s : this) 
+        if(!that.contains(s))
+          result.add(s);}
+      else {
+         for (String s : this)
+          result.add(s);
+      }
+    return result;
+    
+  }
+
+  /**
+   * @return the exclusive or (XOR) of the elements of this and that
+   */
+  public MySet exclusiveOr(MySet that) {
+    MySet result = new MySet();
+        
+    if (that != null)
+    {
+      for (String s : this) 
+        if(!that.contains(s))
+          result.add(s);  
+      
+      for (String s : that) 
+        if(!this.contains(s))
+          result.add(s);
+    }
+    
+    else
+      for (String s : this)
+      result.add(s);
+    
+    
+    return result;
+  }
+
+  /**
+   * @return a String representation of a MySet object
+   */
+  public String toString() {
+   StringBuilder str = new StringBuilder();
+   str.append("MySet< ");
+   for(Iterator<String> i = this.iterator(); i.hasNext(); ){
+     str.append(i.next() + " ");
+   }
+   str.append(">");
+   return str.toString();
+  }
+}
+
