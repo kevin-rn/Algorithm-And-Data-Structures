@@ -1,9 +1,10 @@
-/*
+### Reverse a queue
+
 Implement the method reverse recursively for the Queue ADT, without using any additional data structure.
 
 The code shows the skeleton for the method reverse. Below that (after the point, DO NOT MODIFY), you see the interface for the Queue ADT. All described methods of this ADT have full implementations in the library code, which is hidden.
-*/
 
+```java
 import java.util.*;
 
 abstract class MyQueue<T> implements Queue<T> {
@@ -61,4 +62,4 @@ interface Queue<T> {
    */
   public T front() throws NoSuchElementException;
 }
-
+```
