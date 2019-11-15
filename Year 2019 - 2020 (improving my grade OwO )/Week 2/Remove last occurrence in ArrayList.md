@@ -1,3 +1,4 @@
+### Remove last occurrence in ArrayList
 
 Write a Java method removeLastOccurrence(int x, ArrayList<Integer> list), which removes the last occurrence of an integer x from the arrayList arrList.
 
