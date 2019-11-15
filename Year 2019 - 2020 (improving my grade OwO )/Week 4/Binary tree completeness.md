@@ -1,4 +1,5 @@
-/*
+### Binary tree completeness
+
 Implement a method that checks whether a binary tree is complete. This can be done (for example) by adapting the Breadth-First Search algorithm.
 
 The binary tree can have at most two children, which are both again a binary tree (or null if the child does not exist).
@@ -33,8 +34,8 @@ class BinaryTree {
   // Set the new right child of this tree.
   void setRight(BinaryTree child);
 }
-*/
 
+```java
 import java.util.*;
 
 class Solution {
@@ -69,4 +70,4 @@ class Solution {
     
   }
 }
-
+```
