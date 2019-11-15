@@ -1,4 +1,5 @@
-/*
+### Double-ended queue
+
 Implement a double-ended queue using a circularly linked list.
 
 We have provided you the skeleton of class DoubleEndedQueue which you need to modify. You are expected to complete the implementation of this class by completing following methods:
@@ -32,7 +33,8 @@ The PositionList interface has the following methods:
     set(Position<T> p, T o)
 
 In the second half of the solution template (after the first DO NOT MODIFY), you can find code descriptions for the Deque interface, PositionList interface, and Position interface.
-*/
+
+```java
 
 /**
  * Implementation of a double ended queue.
@@ -330,4 +332,4 @@ interface PositionList<T> {
 interface Position<T> {
   T getElement();
 }
-
+```
