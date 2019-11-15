@@ -5,7 +5,7 @@ Implement a method that checks whether a binary tree is complete. This can be do
 The binary tree can have at most two children, which are both again a binary tree (or null if the child does not exist).
 
 The class BinaryTree has the following methods:
-
+```java
 class BinaryTree {
   // Constructor with no children
   BinaryTree(int key);
@@ -34,7 +34,7 @@ class BinaryTree {
   // Set the new right child of this tree.
   void setRight(BinaryTree child);
 }
-
+```
 ```java
 import java.util.*;
 
