@@ -27,8 +27,46 @@ class Solution {
 }
 
 ```
-  
-   
+### Test
+```java
+import org.junit.*;
+
+import java.util.*;
+
+import static org.junit.Assert.*;
+
+public class UTest {
+  @Test
+  public void testNoItems() {
+    assertEquals(buildSet(), Solution.knapsack(buildSet(), 42));
+  }
+
+  @Test
+  public void testOneItemFits() {
+    Set<Item> items = buildSet(new Item(10, 20));
+    assertEquals(new HashSet<>(items), Solution.knapsack(items, 15));
+  }
+
+  @Test
+  public void testTwoItemsOneFits() {
+    Set<Item> items = buildSet(new Item(2, 20), new Item(10, 2));
+    assertEquals(buildSet(new Item(2, 20)), Solution.knapsack(items, 2));
+  }
+
+  /**
+   * Builds a set from the given items.
+   *
+   * @param items
+   *     The items to build a set from.
+   * @return A set built from the items.
+   */
+  public Set<Item> buildSet(Item... items) {
+    return new HashSet<>(Arrays.asList(items));
+  }
+}
+```
+
+____________________________________________________________________________________________________________________________   
    
 ### Solution:   
 ```java   
