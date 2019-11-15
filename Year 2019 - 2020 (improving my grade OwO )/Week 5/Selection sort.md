@@ -1,4 +1,5 @@
-/*
+### Selection sort
+
 In this assignment, you implement selection sort. A basic definition of this sorting algorithm is given as:
 
     Find the index with the smallest element.
@@ -6,8 +7,8 @@ In this assignment, you implement selection sort. A basic definition of this sor
     Repeat from index plus 1.
     
     See: https://nl.wikipedia.org/wiki/Selection_sort
-*/
-
+    
+```java
 class Solution {
   /**
    * @param elements
@@ -29,4 +30,4 @@ class Solution {
     }
   }
 }
-
+```
