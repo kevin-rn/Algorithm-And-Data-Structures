@@ -1,4 +1,4 @@
-/*
+### Quick Sort (In-place) [not in the new version]
 In this assignment, you have to implement in-place quicksort. A basic definition of this sorting algorithm is given as:
 
     Select a pivot.
@@ -7,8 +7,8 @@ In this assignment, you have to implement in-place quicksort. A basic definition
     Merge small | pivot | large
 
 See:https://en.wikipedia.org/wiki/Quicksort
-*/
 
+```java
 class Solution {
   /**
    * @param elements
@@ -42,4 +42,4 @@ class Solution {
     }
   }
 }
-
+```
