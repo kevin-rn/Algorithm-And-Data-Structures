@@ -1,3 +1,4 @@
+### Remove last occurrence in array
 
 Write a Java method removeLastOccurrence(int x, int[] arr), which removes the last occurrence of a given integer element x from a given array of integer elements arr.
 
