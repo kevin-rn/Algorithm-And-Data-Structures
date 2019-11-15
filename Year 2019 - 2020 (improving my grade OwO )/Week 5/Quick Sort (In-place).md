@@ -1,10 +1,10 @@
 ### Quick Sort (In-place) [not in the new version]
 In this assignment, you have to implement in-place quicksort. A basic definition of this sorting algorithm is given as:
 
-    Select a pivot.
-    Partition the array into two, one part larger than pivot one part smaller.
-    Repeat above on two partitions.
-    Merge small | pivot | large
+Select a pivot.
+Partition the array into two, one part larger than pivot one part smaller.
+Repeat above on two partitions.
+Merge small | pivot | large
 
 See:https://en.wikipedia.org/wiki/Quicksort
 
