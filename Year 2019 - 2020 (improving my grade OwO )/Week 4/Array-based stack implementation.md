@@ -1,4 +1,5 @@
-/*
+### Array-based stack implementation
+
 Implement the class ArrayStack using an array. The other fields of the class are used as follows:
 
     capacity keeps track of the allocated space.
@@ -20,8 +21,8 @@ You can check the comments in the code to see what each method is expected to im
 IMPORTANT: You MAY NOT use the function arraycopy from System, Arrays or similar. In an exam setting, your grade would be overridden to 1 if you do use library functions to copy arrays.
 
 IMPORTANT: pay special attention to pop: if removing top would make the stack use strictly less than (i.e. <) 25% of its capacity, then the capacity is halved, with a minimum capacity of 1. This is enforced by the specification tests.
-*/
 
+```java
 
 class ArrayStack {
   private Object[] elements;
@@ -132,4 +133,4 @@ class ArrayStack {
     return elements;
   }
 }
-
+```
