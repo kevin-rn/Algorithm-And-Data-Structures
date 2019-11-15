@@ -1,11 +1,12 @@
-/*
+### Lazy pre-order depth first traversal of a binary tree
+
 Implement a lazy iterator for a binary tree, which yields the elements stored in a binary tree in depth-first pre-order.
 
 You should consult the book on how to implement depth-first traversal and think about how to implement this in a lazy manner.
 
 Below the skeleton code (after DO NOT MODIFY), we provide you the interfaces for Position and BTree, which have full implementations in the hidden library code.
-*/
 
+```java
 import java.util.*;
 
 /**
@@ -143,4 +144,4 @@ interface BTree<V> {
    */
   public void add(int key, V value);
 }
-//
+```
