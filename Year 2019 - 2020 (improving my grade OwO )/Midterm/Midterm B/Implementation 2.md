@@ -30,4 +30,43 @@ Each Node in the Heap has a reference to its left child Node and a reference to 
 
 Note that if you want to access the Node class, you need to write Heap.Node (you can find examples of this in the visible Library code).
 
-IMPORTANT: If the complexity of your solution is not O(h), you will get 0 points for this assignment.
+#### IMPORTANT: If the complexity of your solution is not O(h), you will get 0 points for this assignment.
+
+```java
+class Solution {
+  /**
+   * @param heap
+   *     the Heap to check, can be null. If not null, this heap will always contain at least one Node.
+   * @return the Node corresponding to the last position in the Heap, or null if the Heap is null.
+   */
+	public static Heap.Node findLastPosition(Heap heap) {
+		// TODO
+		if (heap == null || heap.size() == 0) return null;
+		if (heap.size() == 1) return heap.getRoot();
+		
+		int height = (int)Math.floor(Math.log(heap.size()) / Math.log(2));
+		int maxNodesLastLevel = (int) Math.pow(2, height);
+		int nodesLastLevel = maxNodesLastLevel -  ((int) (Math.pow(2, height+1) - 1) - heap.size());
+
+		int lastLevelIndex = nodesLastLevel - 1;
+
+		int mask = 1 << (height - 1);
+
+		Heap.Node curr = heap.getRoot();
+		int i = 0;
+		while (i < height) {
+			i++;
+			if ((lastLevelIndex & mask) == 0) {
+				curr = heap.getLeft(curr);
+			} else {
+				curr = heap.getRight(curr);
+			}
+			mask = mask >> 1;
+		}
+		
+		return curr;
+
+	}
+}
+```
+
