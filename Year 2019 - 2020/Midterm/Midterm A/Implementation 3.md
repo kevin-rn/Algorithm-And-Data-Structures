@@ -153,11 +153,8 @@ class SolutionPQ extends LibraryPQ {
   @Override
   public void upHeap(int i) {
     if (i == 0) return;
-      int parent;
       // if index is even, i is right child:
-      if (i % 2 == 0) parent = (i - 2) / 2;
-      else parent = (i - 1) / 2;
-     
+      int parent = (i % 2 == 0) ? ((i - 2) / 2) : ((i - 1) / 2);
       if (this.getInHeap(i) > this.getInHeap(parent)) this.swap(i, parent);
       this.upHeap(parent);
   }
