@@ -134,7 +134,7 @@ class Solution {
    */
   public static List<Integer> pqSort(List<Integer> list) {
     LibraryPQ queue = new SolutionPQ();
-    if (list == null || list.size() == 0 || list.size() == 1) return list;
+    if (list == null || list.size() <= 1) return list;
     for (Integer x : list) queue.insert(x);
     for (int i = 0; i < list.size(); i++) list.set(i, queue.removeMax());
     return list;
