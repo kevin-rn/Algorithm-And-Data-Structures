@@ -12,16 +12,16 @@ In addition, you can obtain the path from the root to any node in the last level
 Each bit indicates which child to follow at each level: 0 for left and 1 for right.
 
 For the example heap in the figure above:
-  The height is 3.
-  The middle position has index 2 which translates into the following 32-bit representation: 00000000 00000000 00000000 00000010
-  Taking the h rightmost bits in this binary representation results in 010, indicating that we can directly follow the path 
+- The height is 3.  
+- The middle position has index 2 which translates into the following 32-bit representation: 00000000 00000000 00000000 00000010  
+- Taking the h rightmost bits in this binary representation results in 010, indicating that we can directly follow the path 
   left -> right -> left from the root in order to find the middle node in the last level.
 
 If the index is stored as an integer variable in Java (int index;), you can use a bit mask to sequentially extract the bits of the path as follows:
 
-  Create bit mask to extract the first bit: int mask = 1 << (h-1); (shift 0..00 0..00 0..00 0..001 left h-1 times, resulting in 0..00 0..00 0..00 0..100 for the example above)
-  Update mask for next level: mask >> 1 (shift current mask once to the right: if the current mask is 0..00 0..00 0..00 0..100, this will result in 0..00 0..00 0..00 0..010)
-  Test the bit using the current mask to decide left or right at the current level: index & mask (bitwise “and” operation that evaluates to 0 if the given bit is 0, or non-zero integer if the given bit is 1)
+- Create bit mask to extract the first bit: int mask = 1 << (h-1); (shift 0..00 0..00 0..00 0..001 left h-1 times, resulting in 0..00 0..00 0..00 0..100 for the example above)  
+- Update mask for next level: mask >> 1 (shift current mask once to the right: if the current mask is 0..00 0..00 0..00 0..100, this will result in 0..00 0..00 0..00 0..010)  
+- Test the bit using the current mask to decide left or right at the current level: index & mask (bitwise “and” operation that evaluates to 0 if the given bit is 0, or non-zero integer if the given bit is 1)
 
 We provide an implementation of class Heap (and its inner class Node) in the visible Library code.
 
