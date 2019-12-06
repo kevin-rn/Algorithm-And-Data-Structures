@@ -6,6 +6,7 @@ Note that the last position of a heap is the last (or rightmost) leaf of the las
 
 For the example heap in the figure below, the last position corresponds to the node highlighted in yellow.
 
+![](figure-heap-lastnode-lastlevel.png)
 
 Remember that the number of nodes in the last level (and therefore the index of the last position) can be calculated using the total number of nodes n in the heap, since a heap is a complete binary tree.
 
