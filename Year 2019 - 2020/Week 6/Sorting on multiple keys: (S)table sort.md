@@ -9,13 +9,14 @@ String[][] table = {
   {"a", "b"},
   {"c", "d"}
 };
-
+```
     0   1
   +---+---+
 0 | a | b |
   +---+---+
 1 | c | d |
   +---+---+
+````
 
 To continue on this example, table[0][1] will yield the value "b", since it’s the item in row 0 and column 1.
 
