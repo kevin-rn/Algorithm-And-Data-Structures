@@ -1,4 +1,4 @@
-### Quick Sort (In-place) [not in the new version]
+### Quick Sort (In-place) (1/6)
 In this assignment, you have to implement in-place quicksort. A basic definition of this sorting algorithm is given as:
 
 Select a pivot.
