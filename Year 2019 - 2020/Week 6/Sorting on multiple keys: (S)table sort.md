@@ -1,4 +1,4 @@
-### (S)Table sort
+### (S)Table sort (3/6)
 In this assignment, you will implement a stable sorting algorithm that can be used to sort tables of Strings.
 
 As input, you will receive a two-dimensional array (a table) of Strings and the index of the “column” you should sort. You should sort the rows by the values in the indicated column.
