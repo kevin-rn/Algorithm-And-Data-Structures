@@ -1,4 +1,4 @@
-/*
+### Hash functions (1/6)
 Implement four child classes of the abstract HashTable as defined in the previous exercise with different hashing methods.
 In this representation b0 is the starting value and bi are the intermediate values of the hash code for the string up to character i.
 s represents the size of the table.
@@ -22,8 +22,8 @@ The final value is given as H:
   H=(the last 30 bits of bn)mods
 
 - The hashCode() method of the Java String class. If this is negative, make it positive by using Math.abs() and put it in the right range by using the modulus operator.
-*/
 
+```java
 class ETHHash extends HashTable {
   public ETHHash(int size) {
     super(size);
@@ -83,4 +83,4 @@ class HashCodeHash extends HashTable {
     return Math.abs(item.hashCode()) % getCapacity();
   }
 }
-
+```
