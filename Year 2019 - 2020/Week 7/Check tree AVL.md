@@ -9,7 +9,7 @@ A binary tree is an AVL tree when:
     The difference between the heights of two subtrees of any node is not larger than 1.
 
 The class BinaryTree has the following methods:
-
+```java
 class BinaryTree {
   // Constructor with no children
   BinaryTree(int key);
@@ -38,7 +38,7 @@ class BinaryTree {
   // Set the new right child of this tree.
   void setRight(BinaryTree child);
 }
-
+```
 
 ### Template:
 ```java
