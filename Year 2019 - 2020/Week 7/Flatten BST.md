@@ -6,7 +6,7 @@ is the amount of nodes in the tree.
 The binary tree can have at most two children, which are both again a binary tree (or null if the child does not exist).
 
 The class BinaryTree has the following methods:
-
+```java
 class BinaryTree {
   // Constructor with no children
   BinaryTree(int key);
@@ -35,7 +35,7 @@ class BinaryTree {
   // Set the new right child of this tree.
   void setRight(BinaryTree child);
 }
-
+```
 IMPORTANT: In an exam setting, your grade for this exercise would be overridden to 1 if your algorithm does not run in O(n)
 time or uses more than O(h) space.
 If you want to be sure your implementation satisfies the requirements, ask a TA for feedback during the lab.
