@@ -1,5 +1,4 @@
-/*
-mplement a lazy iterator for a graph, which yields the nodes of an undirected graph in depth-first order. The iterator should return vertices at most once. The iterator does not necessarily iterate over all vertices in the graph, but only vertices that are connected to the starting vertex.
+Implement a lazy iterator for a graph, which yields the nodes of an undirected graph in depth-first order. The iterator should return vertices at most once. The iterator does not necessarily iterate over all vertices in the graph, but only vertices that are connected to the starting vertex.
 
 The following two interfaces are provided, which have full implementations in the hidden library code.
 
@@ -17,8 +16,8 @@ interface Graph {
 With this implementation, you cannot label nodes or edges. Instead, you need to maintain the colored nodes in a set colored. This set can be instantiated with a TreeSet, which stores the elements of a set in a height-balanced search tree. To add a node v to the set, you call colored.add(v). To check if a vertex is already contained in the set, you call colored.contains(v).
 
 If there is a choice between multiple nodes, always pick the one with the lowest id.
-*/
 
+```java
 import java.util.*;
 
 /**
@@ -58,4 +57,4 @@ class GraphIterator implements Iterator<Vertex> {
     
   }
 }
-
+```
