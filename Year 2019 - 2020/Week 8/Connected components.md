@@ -1,4 +1,4 @@
-/*
+
 Implement the method numberOfConnectedComponents(g) which returns the number of connected components in an undirected graph g.
 
 The following two interfaces are provided, which have full implementations in the hidden library code.
@@ -19,8 +19,8 @@ The hidden library code also has a full implementation of the iterator from the 
 IMPORTANT: You are required to use the GraphIterator in your solution. In an exam setting, your code will be checked and if it is seen that you do not use it, your grade will be overridden to 1.
 
 Again, you cannot label nodes or edges. Instead, you need to maintain the unexplored nodes in a collection unexplored, which can be initialized with g.getAllVertices(). To remove an explored node v from unexplored, you call unexplored.remove(v). To get the next unexplored node, you call unexplored.iterator().next().
-*/
 
+```java
 class Solution {
   public static int numberOfConnectedComponents(Graph g) {
     Collection<Vertex> unexplored = g.getAllVertices();
@@ -38,4 +38,5 @@ class Solution {
     }
   }
 }
+```
 
